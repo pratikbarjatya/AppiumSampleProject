@@ -1,14 +1,10 @@
 import io.appium.java_client.android.AndroidDriver;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.MealsListingScreen;
-import utilities.*;
+import org.apache.commons.logging.LogFactory;
+import org.testng.annotations.*;
+import pages.SplashScreen;
+import utilities.TestSetup;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 
 /**
  * Created by PratikB on 13-04-2015.
@@ -16,37 +12,48 @@ import java.net.MalformedURLException;
 
 public class Test1 extends TestSetup {
     private AndroidDriver driver;
-    private String sTestCaseName;
-    MealsListingScreen mealsListingScreen;
+//    private String sTestCaseName;
+    SplashScreen splashScreen;
 
-    @BeforeClass
-    public void setUp() throws MalformedURLException {
-        DOMConfigurator.configure("log4j.xml");
-        driver = getDriver();
-        Log.info("Appium driver instantiated");
-    }
-
-    @BeforeMethod
-    public void beforeMethod() throws Exception {
-        sTestCaseName = this.toString();
-        sTestCaseName = Utils.getTestCaseName(this.toString());
-        Log.startTestCase(sTestCaseName);
+    static {
+        // Disable annoying cookie warnings.
+        // WARNING: Invalid cookie header
+        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
     }
 
     @AfterMethod
     public void afterMethod() {
-
         driver.resetApp();
-        Log.endTestCase(sTestCaseName);
+//        Log.endTestCase(sTestCaseName);
+    }
+
+    @BeforeClass(alwaysRun = true)
+    public void initAutomation() throws IOException {
+        TestSetup.loadConfigProp("config_android_settings.properties");
+        TestSetup.setCapabilities();
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void setUp() throws Exception {
+        driver = TestSetup.getDriver();
+//        sTestCaseName = this.toString();
+//        sTestCaseName = Utils.getTestCaseName(this.toString());
+//        Log.startTestCase(sTestCaseName);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+
+        if(driver != null)
+            driver.quit();
     }
 
     @Test(priority = 1)
     public void VerifyScreen() throws Exception {
-
         Thread.sleep(3000);
-        mealsListingScreen = new MealsListingScreen(driver);
-        Assert.assertTrue(mealsListingScreen.isMealsListingScreenDisplayed());
-
+        splashScreen = new SplashScreen(driver);
+        splashScreen.verifySplashScreen();
+//        Log.info("Verify Splash Screen ...");
     }
 }
 

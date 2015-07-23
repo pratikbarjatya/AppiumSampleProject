@@ -7,7 +7,7 @@ public class Log {
 	private static Logger Log = Logger.getLogger(Log.class);
 
 	// This is to print log for the beginning of the test case, as we usually
-	// run so many test cases as a test suite
+	// run so many test cases as config_android_settings.properties test suite
 	public static void startTestCase(String sTestCaseName) {
 		Log.info("****************************************************************************************");
 		Log.info("****************************************************************************************");
