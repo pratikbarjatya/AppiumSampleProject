@@ -8,7 +8,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.AppUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,11 +48,11 @@ public abstract class AbstractScreen {
                 .implicitlyWait(TestSetup.DEFAULT_WAIT_TIME,
                         TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver,
-                AppUtils.EXPLICIT_WAIT_TIME);
+                TestSetup.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(androidWebView));
         driver.manage()
                 .timeouts()
-                .implicitlyWait(AppUtils.EXPLICIT_WAIT_TIME,
+                .implicitlyWait(TestSetup.EXPLICIT_WAIT_TIME,
                         TimeUnit.SECONDS);
 
         Set<String> contextSet = driver.getContextHandles();
