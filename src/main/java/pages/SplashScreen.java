@@ -4,8 +4,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import utilities.Log;
 import utilities.AbstractScreen;
+import utilities.Log;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class SplashScreen extends AbstractScreen {
     @AndroidFindBy(className = "android.widget.TextView")
     private List<WebElement> textViews;
 
-    public void verifySplashScreen () throws InterruptedException {
+    public void verifySplashScreenUi () throws InterruptedException {
 
         Assert.assertTrue(textViews.get(0).getText().contains("Easiest way to order food") && textViews.get(1).getText().contains("New User?") && textViews.get(2).getText().contains("Join Now") && textViews.get(3).getText().contains("Already have an account?") && textViews.get(4).getText().contains("Sign In"));
         Assert.assertTrue(textViews.size() == 5);

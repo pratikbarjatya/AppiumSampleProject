@@ -425,7 +425,7 @@
             <xsl:with-param name="reporterOutputElement" select="reporter-output"/>
         </xsl:call-template>
 
-        <!--TODO: Review this-->
+
         <xsl:result-document href="{testng:absolutePath('overview-chart.svg')}" format="xml">
             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" width="{$chartWidth}" height="{$chartHeight}"
                  viewBox="0 0 900 300">

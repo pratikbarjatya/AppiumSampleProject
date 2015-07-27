@@ -25,7 +25,7 @@ public class Test1 extends TestSetup {
     public void afterMethod() {
         driver.resetApp();
 //        Log.endTestCase(sTestCaseName);
-    }
+}
 
     @BeforeClass(alwaysRun = true)
     public void initAutomation() throws IOException {
@@ -48,11 +48,11 @@ public class Test1 extends TestSetup {
             driver.quit();
     }
 
-    @Test(priority = 1)
+    @Test(groups = {"unit"}, priority = 1)
     public void VerifyScreen() throws Exception {
         Thread.sleep(3000);
         splashScreen = new SplashScreen(driver);
-        splashScreen.verifySplashScreen();
+        splashScreen.verifySplashScreenUi();
 //        Log.info("Verify Splash Screen ...");
     }
 }

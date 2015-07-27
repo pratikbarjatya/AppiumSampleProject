@@ -66,11 +66,11 @@ public abstract class AbstractScreen {
     }
 
     public void takeScreenShot(String fileName) {
-        File file = new File(fileName + ".jpeg");
+        String path = "./screenshots/" + fileName + ".jpeg";
         File tmpFile = ((TakesScreenshot) driver)
                 .getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(tmpFile, file);
+            FileUtils.copyFile(tmpFile, new File(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
