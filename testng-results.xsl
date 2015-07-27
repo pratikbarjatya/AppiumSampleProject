@@ -343,7 +343,7 @@
         <xsl:param name="testCaseElements"/>
         <xsl:value-of select="if (count($testCaseElements/class/test-method[(@status='FAIL') and (not(@is-config))]) > 0) then 'suiteStatusFail' else 'suiteStatusPass'"/>
     </xsl:function>
-
+    
     <xsl:function name="testng:formatDuration">
         <xsl:param name="durationMs"/>
         <!--Days-->
@@ -364,7 +364,7 @@
                 <xsl:value-of select="format-number(floor(($durationMs mod 60000) div 1000), '#')"/>s
             </xsl:if>
         </xsl:if>
-        <!--Milliseconds - only when less than config_android_settings.properties second-->
+        <!--Milliseconds - only when less than a second-->
         <xsl:if test="$durationMs &lt; 1000">
             <xsl:value-of select="$durationMs"/>&#160;ms
         </xsl:if>
@@ -425,7 +425,7 @@
             <xsl:with-param name="reporterOutputElement" select="reporter-output"/>
         </xsl:call-template>
 
-
+        <!--TODO: Review this-->
         <xsl:result-document href="{testng:absolutePath('overview-chart.svg')}" format="xml">
             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" width="{$chartWidth}" height="{$chartHeight}"
                  viewBox="0 0 900 300">
@@ -546,7 +546,7 @@
                                     <xsl:with-param name="totalCount"
                                                     select="testng:suiteMethodsCount($testCaseElements, '*')"/>
                                     <xsl:with-param name="totalDuration"
-                                                    select="testng:formatDuration(./@duration-ms)"/>
+                                                    select="testng:formatDuration(./@duration-ms)"/>                                                    
                                 </xsl:call-template>
                             </tr>
                             <xsl:for-each select="$testCaseElements">
