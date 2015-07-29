@@ -12,6 +12,9 @@ public class AppMenuScreen extends AbstractScreen {
     @AndroidFindBy(accessibility = "Activity")
     private WebElement appActivity;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Open navigation drawer\")")
+    private WebElement drawer;
+
     public AppMenuScreen(AndroidDriver driver) {
         super(driver);
         loadPage();
@@ -20,6 +23,11 @@ public class AppMenuScreen extends AbstractScreen {
     public AppActivityScreen getActivityPage() {
         appActivity.click();
         return new AppActivityScreen(driver);
+    }
+
+    public HomeScreen getDrawerPage() {
+        drawer.click();
+        return new HomeScreen(driver);
     }
 
 }
